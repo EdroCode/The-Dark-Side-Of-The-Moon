@@ -12,7 +12,7 @@ config_version=4
 
 config/name="The Dark Side of the Moon"
 run/main_scene="res://Scenes/World.tscn"
-config/icon="res://Assets/Sprites.png"
+config/icon="res://Assets/ico.png"
 
 [display]
 
