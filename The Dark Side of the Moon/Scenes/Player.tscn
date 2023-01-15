@@ -16,7 +16,7 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.826733, 0 ), 0.0, 0.0, 0, 
 extents = Vector2( 7.99994, 10.0001 )
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 109.018
+radius = 231.106
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 script = ExtResource( 2 )
@@ -60,7 +60,7 @@ initial_velocity = 15.0
 scale_amount_curve = SubResource( 3 )
 
 [node name="shotPos" type="Position2D" parent="."]
-position = Vector2( 14, 0 )
+position = Vector2( 22, 0 )
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2( -7.99998, 1.81198e-05 )
@@ -88,6 +88,9 @@ shape = SubResource( 4 )
 [node name="ShotDelay" type="Timer" parent="."]
 wait_time = 0.3
 
+[node name="MissileDelay" type="Timer" parent="."]
+wait_time = 3.2
+
 [connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_body_entered"]
 [connection signal="body_exited" from="HurtBox" to="HurtBox" method="_on_HurtBox_body_exited"]
 [connection signal="timeout" from="HeatManager/HeatTimer" to="HeatManager" method="_on_HeatTimer_timeout"]
@@ -95,3 +98,4 @@ wait_time = 0.3
 [connection signal="body_entered" from="DetectArea" to="DetectArea" method="_on_DetectArea_body_entered"]
 [connection signal="body_exited" from="DetectArea" to="DetectArea" method="_on_DetectArea_body_exited"]
 [connection signal="timeout" from="ShotDelay" to="." method="_on_ShotDelay_timeout"]
+[connection signal="timeout" from="MissileDelay" to="." method="_on_MissileDelay_timeout"]

@@ -3,7 +3,7 @@ extends Node2D
 var ui_visibility = true
 
 func _ready():
-	pass 
+	$UI/Missile/RichTextLabel.text = "Missile Ready"
 
 
 func _physics_process(delta):
@@ -38,3 +38,18 @@ func _physics_process(delta):
 		$UI.visible = false
 	
 	
+	
+	
+
+
+func _on_Player_missel_launched():
+	
+	$UI/Missile/Missile/AnimationPlayer.play("Load")
+	
+	$UI/Missile/RichTextLabel.text = "Missile Launched"
+
+func change_anim():
+	
+	$UI/Missile/Missile/AnimationPlayer.play("Idle")
+	$UI/Missile/RichTextLabel.text = "Missile Ready"
+

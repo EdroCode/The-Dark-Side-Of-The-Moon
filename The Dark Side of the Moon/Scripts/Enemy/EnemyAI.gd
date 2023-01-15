@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 # Preload Scenes
-var bullet_scene = preload("res://Scenes/Bullet.tscn")
+var bullet_scene = preload("res://Scenes/EnemyBullet.tscn")
 
 
 # Variables
@@ -77,9 +77,6 @@ func shoot():
 	bullet.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
 	get_parent().add_child(bullet)
 	
-
-
-
 
 
 

@@ -10,12 +10,14 @@ var deceleration = 2
 var test = Vector2.ZERO
 var bullet_speed = 500
 var has_shot = false
+var has_shot_missile = false
 
+signal missel_launched
 
 # Preload Scenes
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
 var explode_scene = preload("res://Scenes/ExplodeParticles.tscn")
-
+var missile_scene = preload("res://Scenes/Missile.tscn")
 
 
 func _ready():
@@ -81,6 +83,22 @@ func _physics_process(delta):
 			has_shot = true
 			$ShotDelay.start()
 	
+	
+	if $DetectArea.enemy != null:
+		
+		if has_shot_missile == false:
+			
+			if Input.is_action_just_pressed("Missile"):
+				
+				
+				emit_signal("missel_launched")
+				
+				has_shot_missile = true
+				$MissileDelay.start()
+				shoot_missile()
+				
+				
+		
 
 
 func shoot_bullet():
@@ -98,6 +116,24 @@ func shoot_bullet():
 	
 	$HeatManager.increase_temp(1)
 
+func shoot_missile():
+	
+	# Instantiate the Bullet
+	
+	var missile = missile_scene.instance()
+	
+	missile.position = get_node("shotPos").global_position
+	missile.rotation_degrees = rotation_degrees + rad2deg(45)
+	get_parent().add_child(missile)
+	
+	# Increase temperature
+	
+	$HeatManager.increase_temp(5)
+
+
+
+
+
 
 # Signals
 
@@ -105,3 +141,8 @@ func shoot_bullet():
 func _on_ShotDelay_timeout():
 	
 	has_shot = false
+
+
+func _on_MissileDelay_timeout():
+	
+	has_shot_missile = false

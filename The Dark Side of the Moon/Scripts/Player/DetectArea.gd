@@ -12,7 +12,7 @@ func _on_DetectArea_body_entered(body):
 	var closest_distance = 9999999
 	
 	for body in bodies:
-		if body.is_in_group("Enemy"):
+		if body.is_in_group("Target"):
 			var distance = body.position.distance_to(get_parent().get_parent().get_node("Player").position)
 			
 			

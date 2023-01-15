@@ -7,6 +7,13 @@ var max_health : int = 100
 var explode_scene = preload("res://Scenes/ExplodeParticles.tscn")
 
 
+func _physics_process(delta):
+	
+	
+	print(health)
+
+
+
 func dicrease_health(value):
 	
 	health -= value

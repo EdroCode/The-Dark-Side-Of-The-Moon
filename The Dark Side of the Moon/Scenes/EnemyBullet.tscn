@@ -1,40 +1,38 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Sprites.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Enemys/UFOEnemy.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/EnemyBullet.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 4 )
+extents = Vector2( 3, 3 )
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 99.1816
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 3.00001, 2.99999 )
 
-[node name="UFOEnemy" type="KinematicBody2D" groups=["Target"]]
-z_index = 2
+[node name="EnemyBullet" type="RigidBody2D" groups=["Bullet"]]
+rotation = 6.28319
 script = ExtResource( 2 )
 
 [node name="Sprites" type="Sprite" parent="."]
-z_index = 1
+position = Vector2( -2, 0 )
+rotation = -2.35619
 texture = ExtResource( 1 )
-hframes = 8
-vframes = 3
-frame = 13
 region_enabled = true
-region_rect = Rect2( 0, 0, 128, 48 )
+region_rect = Rect2( 48, 32, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -2.67983e-05, -6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -4.46636e-06, -1 )
 shape = SubResource( 2 )
 
-[node name="LazerPos" type="Position2D" parent="."]
-position = Vector2( 0, 1 )
-
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.3
-autostart = true
+wait_time = 0.5
 
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
