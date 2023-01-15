@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Sprites.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player/PlayerManager.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/HeatManager.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/HurtBox.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Player/DetectArea.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.00006, 8.99996 )
@@ -13,6 +14,9 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.826733, 0 ), 0.0, 0.0, 0, 
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7.99994, 10.0001 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 109.018
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 script = ExtResource( 2 )
@@ -71,18 +75,23 @@ shape = SubResource( 2 )
 [node name="HeatManager" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
-[node name="CoolTempTimer" type="Timer" parent="HeatManager"]
-wait_time = 10.0
-autostart = true
+[node name="HeatTimer" type="Timer" parent="HeatManager"]
 
-[node name="BoostCoolTimer" type="Timer" parent="HeatManager"]
-wait_time = 0.1
+[node name="CoolTimer" type="Timer" parent="HeatManager"]
 
-[node name="Timer" type="Timer" parent="HeatManager"]
-wait_time = 0.1
+[node name="DetectArea" type="Area2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
+shape = SubResource( 4 )
+
+[node name="ShotDelay" type="Timer" parent="."]
+wait_time = 0.3
 
 [connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_body_entered"]
 [connection signal="body_exited" from="HurtBox" to="HurtBox" method="_on_HurtBox_body_exited"]
-[connection signal="timeout" from="HeatManager/CoolTempTimer" to="HeatManager" method="_on_CoolTempTimer_timeout"]
-[connection signal="timeout" from="HeatManager/BoostCoolTimer" to="." method="_on_BoostCoolTimer_timeout"]
-[connection signal="timeout" from="HeatManager/Timer" to="HeatManager" method="_on_Timer_timeout"]
+[connection signal="timeout" from="HeatManager/HeatTimer" to="HeatManager" method="_on_HeatTimer_timeout"]
+[connection signal="timeout" from="HeatManager/CoolTimer" to="HeatManager" method="_on_CoolTimer_timeout"]
+[connection signal="body_entered" from="DetectArea" to="DetectArea" method="_on_DetectArea_body_entered"]
+[connection signal="body_exited" from="DetectArea" to="DetectArea" method="_on_DetectArea_body_exited"]
+[connection signal="timeout" from="ShotDelay" to="." method="_on_ShotDelay_timeout"]

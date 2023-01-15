@@ -5,7 +5,7 @@ extends Node2D
 export var health: int
 export var max_health : int
 
-var explode_scene = preload("res://Scenes/ExplodeParticles.tscn")
+var explode_scene = preload("res://Scenes/ExplodeParticlesRED.tscn")
 
 
 func _ready():
@@ -25,7 +25,7 @@ func _physics_process(delta):
 		
 		health = 100
 	
-	print(health)
+
 
 
 
@@ -39,9 +39,8 @@ func change_health(value):
 func explode():
 	
 	var explosion = explode_scene.instance()
-	
 	explosion.position = global_position
 	explosion.scale = Vector2(4,4)
-	get_parent().add_child(explosion)
+	get_parent().get_parent().add_child(explosion)
 	get_parent().queue_free()
 

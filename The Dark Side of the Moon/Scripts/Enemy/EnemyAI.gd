@@ -8,8 +8,10 @@ var bullet_scene = preload("res://Scenes/Bullet.tscn")
 var speed = 100
 var velocity = Vector2.ZERO
 var bullet_speed = 400
+var distance
 
-onready var enemy := get_parent().get_node("EnemyShip")
+
+onready var enemy := self
 onready var player := get_parent().get_node("Player")
 
 
@@ -41,8 +43,8 @@ func _physics_process(delta):
 		look_at(player.position)
 		
 	
-	
-	var distance = enemy.position.distance_to(player.position)
+	if enemy != null:
+		distance = enemy.position.distance_to(player.position)
 	velocity = move_and_slide(velocity)
 	
 	if distance <= 100:

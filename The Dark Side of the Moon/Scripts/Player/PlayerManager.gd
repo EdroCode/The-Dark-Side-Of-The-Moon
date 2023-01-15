@@ -9,6 +9,8 @@ var rotation_speed = 5
 var deceleration = 2
 var test = Vector2.ZERO
 var bullet_speed = 500
+var has_shot = false
+
 
 # Preload Scenes
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
@@ -34,7 +36,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("Boost"):
 		
-		$HeatManager/BoostCoolTimer.stop()
+		
 		$BoostParticles.emitting = true
 		
 		acceleration += 20
@@ -44,7 +46,6 @@ func _physics_process(delta):
 	elif Input.is_action_just_released("Boost"):
 		
 		$BoostParticles.emitting = false
-		$HeatManager/BoostCoolTimer.start()
 		acceleration -= 30
 	
 	
@@ -72,8 +73,14 @@ func _physics_process(delta):
 	
 	# Shoot
 	
-	if Input.is_action_just_pressed("Fire"):
-		shoot_bullet()
+	if has_shot == false:
+		
+		
+		if Input.is_action_just_pressed("Fire"):
+			shoot_bullet()
+			has_shot = true
+			$ShotDelay.start()
+	
 
 
 func shoot_bullet():
@@ -81,8 +88,9 @@ func shoot_bullet():
 	# Instantiate the Bullet
 	
 	var bullet = bullet_scene.instance()
+	
 	bullet.position = get_node("shotPos").global_position
-	bullet.rotation_degrees = rotation_degrees + rad2deg(90)
+	bullet.rotation_degrees = rotation_degrees + rad2deg(45)
 	bullet.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
 	get_parent().add_child(bullet)
 	
@@ -93,6 +101,7 @@ func shoot_bullet():
 
 # Signals
 
-func _on_BoostCoolTimer_timeout():
+
+func _on_ShotDelay_timeout():
 	
-	$HeatManager.increase_temp(-1)
+	has_shot = false

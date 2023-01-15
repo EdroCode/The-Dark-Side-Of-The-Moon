@@ -102,6 +102,10 @@ scale = Vector2( 1.2, 1.2 )
 position = Vector2( 116, 111 )
 scale = Vector2( 2, 2 )
 
+[node name="EnemyShip2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 306, 66 )
+scale = Vector2( 2, 2 )
+
 [node name="Border" type="TextureRect" parent="."]
 margin_right = 512.0
 margin_bottom = 512.0
