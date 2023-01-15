@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sprite-ddd0001.png-ee478ec2bf1759f31690019c76520136.stex"
+path="res://.import/slider.png-8afcb3667d474d6b7ad19bfff2eb999b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite-ddd0001.png"
-dest_files=[ "res://.import/Sprite-ddd0001.png-ee478ec2bf1759f31690019c76520136.stex" ]
+source_file="res://Assets/slider.png"
+dest_files=[ "res://.import/slider.png-8afcb3667d474d6b7ad19bfff2eb999b.stex" ]
 
 [params]
 

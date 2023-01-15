@@ -1,36 +1,58 @@
 extends KinematicBody2D
 
+
+#Variables
+
 var velocity = Vector2()
 var acceleration = 100
 var rotation_speed = 5
 var deceleration = 2
-
+var test = Vector2.ZERO
 var bullet_speed = 500
+
+# Preload Scenes
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
+var explode_scene = preload("res://Scenes/ExplodeParticles.tscn")
 
 
 
 func _ready():
+	
+	#Variables & Particles set
+	
 	$BoostParticles.emitting = false
+
+
 
 func _physics_process(delta):
 	
 	
+	# Movement
 	
 	if Input.is_action_pressed("Up"):
 		velocity += Vector2(acceleration, 0).rotated(rotation) * delta
+	
 	if Input.is_action_pressed("Boost"):
-		acceleration += 20
+		
+		$HeatManager/BoostCoolTimer.stop()
 		$BoostParticles.emitting = true
+		
+		acceleration += 20
 		if acceleration >= 300:
 			acceleration = 300
+		
 	elif Input.is_action_just_released("Boost"):
+		
 		$BoostParticles.emitting = false
+		$HeatManager/BoostCoolTimer.start()
 		acceleration -= 30
-	#Check for down action to reduce velocity over time
 	
+	
+	# Rotate
 	
 	if Input.is_action_pressed("Down"):
+		velocity -= Vector2(acceleration, 0).rotated(rotation) * delta
+	if Input.is_action_pressed("Stop"):
 		velocity -= velocity * deceleration * delta
 	if Input.is_action_pressed("Left"):
 		rotation -= rotation_speed * delta
@@ -38,30 +60,39 @@ func _physics_process(delta):
 		rotation += rotation_speed * delta
 	
 	
-	position += velocity * delta
+	# Collision
 	
+	test = move_and_collide(velocity*delta)
 	
+	if test:
+		
+		$HurtBox.dicrease_health(5)
+		velocity -= velocity * deceleration * delta * 40
+		
 	
-	
-	
-	
+	# Shoot
 	
 	if Input.is_action_just_pressed("Fire"):
 		shoot_bullet()
-	
-	
 
 
 func shoot_bullet():
 	
+	# Instantiate the Bullet
+	
 	var bullet = bullet_scene.instance()
 	bullet.position = get_node("shotPos").global_position
-	bullet.rotation_degrees = rotation_degrees
+	bullet.rotation_degrees = rotation_degrees + rad2deg(90)
 	bullet.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
 	get_parent().add_child(bullet)
 	
+	# Increase temperature
 	
 	$HeatManager.increase_temp(1)
+
+
+# Signals
+
+func _on_BoostCoolTimer_timeout():
 	
-	
-	
+	$HeatManager.increase_temp(-1)

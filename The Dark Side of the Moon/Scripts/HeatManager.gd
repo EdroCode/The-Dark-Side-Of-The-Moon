@@ -4,6 +4,9 @@ extends Node2D
 var cur_temp : int
 var max_temp : int
 
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -20,7 +23,7 @@ func _ready():
 
 func _physics_process(delta):
 	
-	print(cur_temp)
+	
 	
 	if cur_temp >= max_temp:
 		
@@ -33,18 +36,25 @@ func _physics_process(delta):
 		
 		
 	
+	if Input.is_action_just_pressed("Boost"):
+		
+		$Timer.start()
+		
+		
+	elif Input.is_action_just_released("Boost"):
+		
+		$Timer.stop()
 	
 	if cur_temp <= 50:
 		
 		$CoolTempTimer.wait_time = .5
+		get_parent().get_node("HeatParticles").emitting = false
+		
 		
 	else:
-		
+		get_parent().get_node("HeatParticles").emitting = true
 		$CoolTempTimer.wait_time = 2
 	
-	
-	
-
 	
 
 
@@ -56,4 +66,9 @@ func increase_temp(value):
 func _on_CoolTempTimer_timeout():
 	
 	
-	increase_temp(-2)
+	increase_temp(-5)
+
+
+func _on_Timer_timeout():
+	
+	increase_temp(2)

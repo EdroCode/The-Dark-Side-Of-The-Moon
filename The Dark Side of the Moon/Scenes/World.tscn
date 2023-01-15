@@ -1,16 +1,87 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Sprites.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/WorldManager.gd" type="Script" id=3]
-[ext_resource path="res://PublicPixel-z84yD.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://slider-sheet.png" type="Texture" id=5]
-[ext_resource path="res://slider-sheet-sheet.png" type="Texture" id=6]
-[ext_resource path="res://Sprite-ddd0001.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/WorldManager.gd" type="Script" id=3]
+[ext_resource path="res://Assets/PublicPixel-z84yD.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/slider-sheet.png" type="Texture" id=5]
+[ext_resource path="res://Assets/slider-sheet-sheet.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprite-ddd0001.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/Enemys/EnemyShip.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/warning screen.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/ScoreManager.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 512, 512 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Warning"
+length = 10.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 512, 512 ), Vector2( 512, 400 ), Vector2( 512, 512 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 3, 51 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="PhysicsMaterial" id=3]
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0.681818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -24,37 +95,182 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 282, 185 )
+position = Vector2( 295, 383 )
 scale = Vector2( 1.2, 1.2 )
+
+[node name="EnemyShip" parent="." instance=ExtResource( 8 )]
+position = Vector2( 116, 111 )
+scale = Vector2( 2, 2 )
+
+[node name="Border" type="TextureRect" parent="."]
+margin_right = 512.0
+margin_bottom = 512.0
+texture = ExtResource( 7 )
+expand = true
 
 [node name="UI" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
-margin_left = 473.0
-margin_top = 5.0
-margin_right = 505.0
-margin_bottom = 14.0
+[node name="Condition" type="Control" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Condition"]
+margin_left = 9.0
+margin_top = 7.0
+margin_right = 87.0
+margin_bottom = 33.0
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 1 )
+text = "CONDITION"
+scroll_active = false
+
+[node name="TextureProgress" type="TextureProgress" parent="UI/Condition"]
+margin_left = 10.0
+margin_top = 19.0
+margin_right = 25.0
+margin_bottom = 51.0
+rect_scale = Vector2( 3.5, 3.5 )
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+fill_mode = 3
+
+[node name="Heat" type="Control" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Heat"]
+margin_left = 474.0
+margin_top = 7.0
+margin_right = 506.0
+margin_bottom = 16.0
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 1 )
 custom_fonts/italics_font = SubResource( 1 )
 custom_fonts/bold_font = SubResource( 1 )
 custom_fonts/normal_font = SubResource( 1 )
 text = "TEMP"
+scroll_active = false
 
-[node name="TextureProgress" type="TextureProgress" parent="UI"]
+[node name="TextureProgress" type="TextureProgress" parent="UI/Heat"]
 margin_left = 477.0
-margin_top = 15.0
-margin_right = 603.0
-margin_bottom = 141.0
+margin_top = 17.0
+margin_right = 492.0
+margin_bottom = 49.0
 rect_scale = Vector2( 3.5, 3.5 )
+value = 100.0
 texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 6 )
 fill_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="UI"]
+[node name="Score" type="Control" parent="UI"]
+margin_left = 256.0
+margin_right = 295.0
+margin_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Score"]
+margin_left = -38.0
+margin_top = 7.0
+margin_right = 40.0
+margin_bottom = 33.0
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 1 )
+text = "SCORE:"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="UI/Score"]
+margin_left = 10.0
+margin_top = 7.0
+margin_right = 88.0
+margin_bottom = 33.0
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 1 )
+text = "0"
+scroll_active = false
+
+[node name="WarningScreen" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="WarningScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 472.0
+margin_bottom = 472.0
+color = Color( 0, 0, 0, 0.517647 )
+
+[node name="TextureRect" type="TextureRect" parent="WarningScreen"]
 margin_right = 512.0
 margin_bottom = 512.0
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 expand = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WarningScreen"]
+modulate = Color( 0.67451, 0.196078, 0.196078, 1 )
+margin_left = 40.0
+margin_top = 207.0
+margin_right = 335.0
+margin_bottom = 267.0
+rect_scale = Vector2( 1.5, 1.5 )
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 6 )
+text = "!WARNING!"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="WarningScreen"]
+modulate = Color( 0.67451, 0.196078, 0.196078, 1 )
+margin_left = 96.0
+margin_top = 271.0
+margin_right = 505.0
+margin_bottom = 331.0
+rect_scale = Vector2( 0.8, 0.8 )
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 5 )
+text = "|HIGH TEMPERATURE LEVELS|"
+scroll_active = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WarningScreen"]
+autoplay = "Warning"
+playback_speed = 10.0
+anims/RESET = SubResource( 8 )
+anims/Warning = SubResource( 7 )
+
+[node name="Walls" type="StaticBody2D" parent="." groups=["Walls"]]
+physics_material_override = SubResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls" groups=["Walls"]]
+polygon = PoolVector2Array( 507, 4, 4, 4, 4, 508, 508, 508, 508, 4, 519, 4, 595, 1, 630, 612, -191, 580, -157, 22, -95, -154, 434, -163, 558, -95, 541, -12, 511, -1 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.454902 )
+position = Vector2( 258, 236 )
+amount = 673
+lifetime = 3.0
+preprocess = 46.0
+emission_shape = 1
+emission_sphere_radius = 404.22
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 1.0
+scale_amount = 3.0
+scale_amount_curve = SubResource( 4 )
+
+[node name="ScoreManager" type="Node2D" parent="."]
+script = ExtResource( 10 )

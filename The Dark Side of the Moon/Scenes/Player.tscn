@@ -1,19 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Sprites.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player/PlayerManager.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/HeatManager.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/HeatManager.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/HurtBox.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 7 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 6, 8 )
+extents = Vector2( 7.00006, 8.99996 )
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.826733, 0 ), 0.0, 0.0, 0, 0 ]
 
-[node name="Player" type="KinematicBody2D"]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7.99994, 10.0001 )
+
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -25,21 +26,13 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1.81198e-05, 1.81198e-05 )
+position = Vector2( -2.08616e-07, -2.08616e-07 )
 rotation = 1.57079
 shape = SubResource( 1 )
 
-[node name="HurtBox" type="Area2D" parent="."]
-position = Vector2( -7.99998, 1.81198e-05 )
-rotation = 1.57079
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-modulate = Color( 0.290196, 1, 0, 1 )
-position = Vector2( 0, -8 )
-shape = SubResource( 2 )
-
 [node name="BoostParticles" type="CPUParticles2D" parent="."]
 position = Vector2( -4, 0 )
+emitting = false
 amount = 100
 emission_shape = 2
 emission_rect_extents = Vector2( 2, 2 )
@@ -49,14 +42,47 @@ gravity = Vector2( -200, 0 )
 initial_velocity = 155.96
 scale_amount_curve = SubResource( 3 )
 
+[node name="HeatParticles" type="CPUParticles2D" parent="."]
+modulate = Color( 1, 0.270588, 0.27451, 1 )
+position = Vector2( -4, 0 )
+emitting = false
+amount = 158
+emission_shape = 2
+emission_rect_extents = Vector2( 2, 2 )
+direction = Vector2( -100, 3 )
+spread = 20.0
+gravity = Vector2( -20, 0 )
+initial_velocity = 15.0
+scale_amount_curve = SubResource( 3 )
+
 [node name="shotPos" type="Position2D" parent="."]
-position = Vector2( 7, 0 )
+position = Vector2( 14, 0 )
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2( -7.99998, 1.81198e-05 )
+rotation = 1.57079
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+modulate = Color( 0.290196, 1, 0, 1 )
+position = Vector2( 3.21943e-05, -7.99998 )
+shape = SubResource( 2 )
 
 [node name="HeatManager" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
 [node name="CoolTempTimer" type="Timer" parent="HeatManager"]
-wait_time = 2.0
+wait_time = 10.0
 autostart = true
 
+[node name="BoostCoolTimer" type="Timer" parent="HeatManager"]
+wait_time = 0.1
+
+[node name="Timer" type="Timer" parent="HeatManager"]
+wait_time = 0.1
+
+[connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_body_entered"]
+[connection signal="body_exited" from="HurtBox" to="HurtBox" method="_on_HurtBox_body_exited"]
 [connection signal="timeout" from="HeatManager/CoolTempTimer" to="HeatManager" method="_on_CoolTempTimer_timeout"]
+[connection signal="timeout" from="HeatManager/BoostCoolTimer" to="." method="_on_BoostCoolTimer_timeout"]
+[connection signal="timeout" from="HeatManager/Timer" to="HeatManager" method="_on_Timer_timeout"]
