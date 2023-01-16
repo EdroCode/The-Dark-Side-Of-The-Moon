@@ -4,7 +4,7 @@ extends KinematicBody2D
 #Variables
 
 var velocity = Vector2()
-var acceleration = 100
+var acceleration = 60
 var rotation_speed = 5
 var deceleration = 2
 var test = Vector2.ZERO
@@ -42,9 +42,9 @@ func _physics_process(delta):
 		
 		$BoostParticles.emitting = true
 		
-		acceleration += 20
-		if acceleration >= 300:
-			acceleration = 300
+		acceleration +=5
+		if acceleration >= 200:
+			acceleration = 200
 		
 	elif Input.is_action_just_released("Boost"):
 		
