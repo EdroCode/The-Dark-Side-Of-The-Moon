@@ -5,7 +5,7 @@ extends Node2D
 export var health: int
 export var max_health : int
 
-var explode_scene = preload("res://Scenes/ExplodeParticlesRED.tscn")
+var explode_scene = preload("res://Scenes/Particles/ExplodeParticlesRED.tscn")
 
 
 func _ready():

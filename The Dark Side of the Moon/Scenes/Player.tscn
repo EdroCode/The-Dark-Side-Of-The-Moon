@@ -7,7 +7,7 @@
 [ext_resource path="res://Scripts/Player/DetectArea.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.00006, 8.99996 )
+extents = Vector2( 6.00005, 7.99996 )
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.826733, 0 ), 0.0, 0.0, 0, 0 ]
@@ -30,7 +30,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2.08616e-07, -2.08616e-07 )
+position = Vector2( 5.96046e-08, -1.78814e-07 )
 rotation = 1.57079
 shape = SubResource( 1 )
 

@@ -18,7 +18,6 @@ func _physics_process(delta):
 	
 	$UI/Score/RichTextLabel2.text = str($ScoreManager.score)
 	
-	
 	if Input.is_action_just_pressed("Show"):
 		
 		if ui_visibility == true:
@@ -27,6 +26,7 @@ func _physics_process(delta):
 			ui_visibility = true
 		
 		pass
+	
 	
 	
 	if ui_visibility == true:

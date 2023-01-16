@@ -16,8 +16,9 @@ signal missel_launched
 
 # Preload Scenes
 var bullet_scene = preload("res://Scenes/Bullet.tscn")
-var explode_scene = preload("res://Scenes/ExplodeParticles.tscn")
+var explode_scene = preload("res://Scenes/Particles/ExplodeParticles.tscn")
 var missile_scene = preload("res://Scenes/Missile.tscn")
+var missile_trail = preload("res://Scenes/Particles/MissileTrailRED.tscn")
 
 
 func _ready():
@@ -126,9 +127,13 @@ func shoot_missile():
 	missile.rotation_degrees = rotation_degrees + rad2deg(45)
 	get_parent().add_child(missile)
 	
+	
+	
+	
+	
 	# Increase temperature
 	
-	$HeatManager.increase_temp(5)
+	$HeatManager.increase_temp(20)
 
 
 

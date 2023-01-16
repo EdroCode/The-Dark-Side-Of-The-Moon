@@ -9,7 +9,7 @@
 [ext_resource path="res://Assets/Sprite-ddd0001.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/Enemys/EnemyShip.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/warning screen.png" type="Texture" id=9]
-[ext_resource path="res://Scenes/ScoreManager.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/ScoreManager.gd" type="Script" id=10]
 [ext_resource path="res://Assets/missile.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
@@ -162,12 +162,13 @@ rotation = -1.57079
 scale = Vector2( 1.2, 1.2 )
 
 [node name="EnemyShip" parent="." instance=ExtResource( 8 )]
+position = Vector2( 68, 48 )
 
-[node name="Border" type="TextureRect" parent="."]
-margin_right = 512.0
-margin_bottom = 512.0
-texture = ExtResource( 7 )
-expand = true
+[node name="EnemyShip2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 145, 97 )
+
+[node name="EnemyShip3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 311, 68 )
 
 [node name="UI" type="Control" parent="."]
 margin_right = 40.0
@@ -371,5 +372,10 @@ scale_amount_curve = SubResource( 4 )
 
 [node name="ScoreManager" type="Node2D" parent="."]
 script = ExtResource( 10 )
+
+[node name="Border" type="Sprite" parent="."]
+position = Vector2( 256, 256 )
+z_index = 66
+texture = ExtResource( 7 )
 
 [connection signal="missel_launched" from="Player" to="." method="_on_Player_missel_launched"]
