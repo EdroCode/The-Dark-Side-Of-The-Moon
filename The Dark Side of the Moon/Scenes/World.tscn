@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites.png" type="Texture" id=2]
@@ -11,6 +11,12 @@
 [ext_resource path="res://Assets/warning screen.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/ScoreManager.gd" type="Script" id=10]
 [ext_resource path="res://Assets/missile.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/WaveSpawner.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/MotorRepair.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/PauseMenu.gd" type="Script" id=14]
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0.681818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -78,7 +84,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="DynamicFont" id=6]
-size = 32
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -142,9 +147,6 @@ tracks/1/keys = {
 
 [sub_resource type="PhysicsMaterial" id=3]
 
-[sub_resource type="Curve" id=4]
-_data = [ Vector2( 0, 0.681818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -155,6 +157,22 @@ scale = Vector2( 117.594, 76.4063 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.454902 )
+position = Vector2( 258, 236 )
+amount = 673
+lifetime = 3.0
+preprocess = 46.0
+emission_shape = 1
+emission_sphere_radius = 404.22
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 1.0
+scale_amount = 3.0
+scale_amount_curve = SubResource( 4 )
+
+[node name="WaveSpawner" parent="." instance=ExtResource( 12 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 253, 413 )
@@ -309,10 +327,7 @@ margin_bottom = 472.0
 color = Color( 0, 0, 0, 0.517647 )
 
 [node name="TextureRect" type="TextureRect" parent="WarningScreen"]
-margin_right = 512.0
-margin_bottom = 512.0
 texture = ExtResource( 9 )
-expand = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="WarningScreen"]
 modulate = Color( 0.67451, 0.196078, 0.196078, 1 )
@@ -350,25 +365,79 @@ playback_speed = 10.0
 anims/RESET = SubResource( 8 )
 anims/Warning = SubResource( 7 )
 
+[node name="MotorRepair" parent="." instance=ExtResource( 13 )]
+visible = false
+
+[node name="PauseMenu" type="Control" parent="."]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 14 )
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+margin_right = 512.0
+margin_bottom = 512.0
+color = Color( 0.0823529, 0.0823529, 0.0823529, 0.705882 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PauseMenu/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -129.0
+margin_top = -100.0
+margin_right = 52.0
+margin_bottom = -74.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( -0.222229, 0.666672 )
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 6 )
+text = "GAME PAUSED"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PauseMenu/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = -66.0
+margin_right = 215.0
+margin_bottom = -6.0
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 6 )
+text = "SCORE:"
+scroll_active = false
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="PauseMenu/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 24.0
+margin_top = -65.0
+margin_right = 319.0
+margin_bottom = -5.0
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 6 )
+text = "0"
+scroll_active = false
+
 [node name="Walls" type="StaticBody2D" parent="." groups=["Walls"]]
 physics_material_override = SubResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls" groups=["Walls"]]
 polygon = PoolVector2Array( 507, 4, 4, 4, 4, 508, 508, 508, 508, 4, 519, 4, 595, 1, 630, 612, -191, 580, -157, 22, -95, -154, 434, -163, 558, -95, 541, -12, 511, -1 )
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-modulate = Color( 1, 1, 1, 0.454902 )
-position = Vector2( 258, 236 )
-amount = 673
-lifetime = 3.0
-preprocess = 46.0
-emission_shape = 1
-emission_sphere_radius = 404.22
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 1.0
-scale_amount = 3.0
-scale_amount_curve = SubResource( 4 )
 
 [node name="ScoreManager" type="Node2D" parent="."]
 script = ExtResource( 10 )

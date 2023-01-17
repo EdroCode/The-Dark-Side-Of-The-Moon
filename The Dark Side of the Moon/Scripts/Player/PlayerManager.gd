@@ -4,7 +4,7 @@ extends KinematicBody2D
 #Variables
 
 var velocity = Vector2()
-var acceleration = 60
+var acceleration = 100
 var rotation_speed = 5
 var deceleration = 2
 var test = Vector2.ZERO
@@ -43,8 +43,8 @@ func _physics_process(delta):
 		$BoostParticles.emitting = true
 		
 		acceleration +=5
-		if acceleration >= 200:
-			acceleration = 200
+		if acceleration >= 300:
+			acceleration = 300
 		
 	elif Input.is_action_just_released("Boost"):
 		
@@ -58,10 +58,9 @@ func _physics_process(delta):
 		velocity -= Vector2(acceleration, 0).rotated(rotation) * delta
 	if Input.is_action_pressed("Stop"):
 		velocity -= velocity * deceleration * delta
-	if Input.is_action_pressed("Left"):
-		rotation -= rotation_speed * delta
-	elif Input.is_action_pressed("Right"):
-		rotation += rotation_speed * delta
+	
+	look_at(get_global_mouse_position())
+	
 	
 	
 	# Collision

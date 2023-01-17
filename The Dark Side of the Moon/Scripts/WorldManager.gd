@@ -2,6 +2,10 @@ extends Node2D
 
 var ui_visibility = true
 
+var gameIsPaused = false
+
+
+
 func _ready():
 	$UI/Missile/RichTextLabel.text = "Missile Ready"
 
@@ -39,6 +43,12 @@ func _physics_process(delta):
 	
 	
 	
+	
+	
+	
+	
+
+
 	
 
 

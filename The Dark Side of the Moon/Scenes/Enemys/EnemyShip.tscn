@@ -12,10 +12,10 @@ _data = [ Vector2( 0, 0.221591 ), 0.0, 0.0, 0, 0, Vector2( 0.420792, 0 ), 0.0, 0
 extents = Vector2( 5.5, 6.5 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 262.721
+radius = 2039.19
 
 [node name="EnemyShip" type="KinematicBody2D" groups=["Enemy", "Target"]]
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 1.5, 1.51948 )
 script = ExtResource( 2 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
