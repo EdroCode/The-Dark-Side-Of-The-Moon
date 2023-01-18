@@ -33,7 +33,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[node name="ExplodeParticles" type="CPUParticles2D"]
+[node name="ExplodeParticles" type="CPUParticles2D" groups=["Particle"]]
 scale = Vector2( 1.5, 1.5 )
 z_index = 2
 emitting = false

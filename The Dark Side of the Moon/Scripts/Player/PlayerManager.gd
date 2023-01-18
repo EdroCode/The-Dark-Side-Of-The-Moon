@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 
+
+
 #Variables
 
 var velocity = Vector2()
@@ -21,9 +23,22 @@ var missile_scene = preload("res://Scenes/Missile.tscn")
 var missile_trail = preload("res://Scenes/Particles/MissileTrailRED.tscn")
 
 
+# Suport Variables
+
+var oxygen
+var heat
+var condition
+
+
+# Signals
+
+signal playerIsDead
+
+
 func _ready():
 	
 	#Variables & Particles set
+	
 	
 	$BoostParticles.emitting = false
 
@@ -32,6 +47,17 @@ func _ready():
 func _physics_process(delta):
 	
 	
+	
+	# Variable Check
+	
+	oxygen = $Oxygen.oxygen
+	heat = get_node("HeatManager").cur_temp
+	condition = get_node("HurtBox").health
+	
+	GameManager.oxygen = oxygen
+	
+	
+
 	# Movement
 	
 	if Input.is_action_pressed("Up"):

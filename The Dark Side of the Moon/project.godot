@@ -14,6 +14,10 @@ config/name="The Dark Side of the Moon"
 run/main_scene="res://Scenes/Menu/Menu.tscn"
 config/icon="res://Assets/ico.png"
 
+[autoload]
+
+GameManager="*res://Scripts/GameManager.gd"
+
 [display]
 
 window/size/width=512

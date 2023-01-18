@@ -33,7 +33,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[node name="RetroExplosionParticle" type="Sprite"]
+[node name="RetroExplosionParticle" type="Sprite" groups=["Particle"]]
 modulate = Color( 1, 0.270588, 0.27451, 1 )
 position = Vector2( 1, -1 )
 z_index = 1

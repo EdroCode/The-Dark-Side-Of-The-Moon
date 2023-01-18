@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/PublicPixel-z84yD.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/Menu/Menu.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Menu.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprite-ddd0001.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -73,6 +74,11 @@ margin_bottom = 138.0
 custom_fonts/font = SubResource( 1 )
 text = "QUIT"
 flat = true
+
+[node name="Border" type="Sprite" parent="."]
+position = Vector2( 256, 256 )
+z_index = 66
+texture = ExtResource( 4 )
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]

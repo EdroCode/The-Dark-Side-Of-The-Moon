@@ -1,27 +1,137 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Items/Object.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/RepairStation.gd" type="Script" id=2]
+[ext_resource path="res://Assets/blueprint-sheet.png" type="Texture" id=3]
+[ext_resource path="res://Assets/PublicPixel-z84yD.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/BarProgress.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30.5, 34 )
 
 [node name="RepairStation" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+pause_mode = 2
+margin_right = 512.0
+margin_bottom = 512.0
+mouse_filter = 2
+color = Color( 0.109804, 0.109804, 0.109804, 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+pause_mode = 2
+margin_left = 11.0
+margin_top = 10.0
+margin_right = 277.0
+margin_bottom = 50.0
+rect_scale = Vector2( 0.8, 0.8 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 2 )
+text = "Repair Terminal"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+
+[node name="Oxygen" type="RichTextLabel" parent="TextureRect"]
+pause_mode = 2
+margin_left = 128.0
+margin_top = 94.0
+margin_right = 247.0
+margin_bottom = 134.0
+rect_scale = Vector2( 0.8, 0.8 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 2 )
+text = "Oxygen"
+scroll_active = false
+
+[node name="OxygenBar" type="TextureProgress" parent="TextureRect"]
+pause_mode = 2
+margin_left = 116.0
+margin_top = 111.0
+margin_right = 218.0
+margin_bottom = 151.0
+mouse_filter = 2
+value = 100.0
+texture_progress = ExtResource( 5 )
+
+[node name="HeatBar" type="TextureProgress" parent="TextureRect"]
+pause_mode = 2
+margin_left = 267.0
+margin_top = 31.0
+margin_right = 369.0
+margin_bottom = 71.0
+mouse_filter = 2
+value = 100.0
+texture_progress = ExtResource( 5 )
+
+[node name="ConditionBar" type="TextureProgress" parent="TextureRect"]
+pause_mode = 2
+margin_left = 136.0
+margin_top = 440.0
+margin_right = 238.0
+margin_bottom = 480.0
+mouse_filter = 2
+value = 100.0
+texture_progress = ExtResource( 5 )
+
+[node name="Heat" type="RichTextLabel" parent="TextureRect"]
+pause_mode = 2
+margin_left = 286.0
+margin_top = 14.0
+margin_right = 405.0
+margin_bottom = 54.0
+rect_scale = Vector2( 0.8, 0.8 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 2 )
+text = "Heat"
+scroll_active = false
+
+[node name="Condition" type="RichTextLabel" parent="TextureRect"]
+pause_mode = 2
+margin_left = 141.0
+margin_top = 426.0
+margin_right = 311.0
+margin_bottom = 466.0
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 2 )
+text = "Condition"
+scroll_active = false
 
 [node name="Object" parent="." instance=ExtResource( 1 )]
-position = Vector2( 106, 353 )
-scale = Vector2( 2, 2 )
+pause_mode = 2
+position = Vector2( 460, 316 )
+scale = Vector2( 4, 4 )
 
 [node name="Object2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 268, 417 )
-scale = Vector2( 2, 2 )
+pause_mode = 2
+position = Vector2( 461, 394 )
+scale = Vector2( 4, 4 )
 sprite = 1
 
 [node name="Object3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 489, 323 )
-scale = Vector2( 2, 2 )
+pause_mode = 2
+position = Vector2( 461, 458 )
+scale = Vector2( 4, 4 )
 sprite = 2
 
 [node name="Area2D" type="Area2D" parent="."]
+pause_mode = 2
+position = Vector2( 260, 205 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+pause_mode = 2
 shape = SubResource( 1 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]

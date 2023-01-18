@@ -10,7 +10,10 @@ var explode_scene = preload("res://Scenes/Particles/ExplodeParticles.tscn")
 func _physics_process(delta):
 	
 	
-	pass
+	if health <= 0:
+		
+		health = 0
+		get_parent().emit_signal("playerIsDead")
 
 
 

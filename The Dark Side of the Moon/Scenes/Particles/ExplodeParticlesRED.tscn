@@ -33,7 +33,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[node name="ExplodeParticles" type="CPUParticles2D"]
+[node name="ExplodeParticles" type="CPUParticles2D" groups=["Particle"]]
 modulate = Color( 1, 0.270588, 0.27451, 1 )
 scale = Vector2( 1.5, 1.5 )
 z_index = 2

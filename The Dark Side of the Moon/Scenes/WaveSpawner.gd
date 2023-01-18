@@ -1,13 +1,11 @@
 extends Node2D
 
 
-var enemy_list = [
-	
-	# SpaceShip Enemy
-	preload("res://Scenes/Enemys/EnemyShip.tscn"),
-	#preload("res://Scenes/Enemys/UFOEnemy.tscn")
-	
-]
+
+var spaceship = preload("res://Scenes/Enemys/EnemyShip.tscn")
+var ufo = preload("res://Scenes/Enemys/UFOEnemy.tscn")
+
+
 
 var max_enemys : int = 1
 var i : int
@@ -29,12 +27,15 @@ func _on_SpawnTimer_timeout():
 func spawn():
 	
 	
-	var enemy_spawn = rand_range(0,enemy_list.size())
-	var scene = enemy_list[enemy_spawn].instance()
-	scene.position = $Position2D.global_position
-	get_parent().add_child(scene)
+	print("Enemys Spawned")
 	
+	var enemy_spawn = spaceship.instance()
+	enemy_spawn.position = $Position2D.global_position
+	get_parent().add_child(enemy_spawn)
 	
+	#var ufo_spawn = ufo.instance()
+	#ufo_spawn.position = $Position2D2.global_position
+	#get_parent().add_child(ufo_spawn)
 	pass
 
 

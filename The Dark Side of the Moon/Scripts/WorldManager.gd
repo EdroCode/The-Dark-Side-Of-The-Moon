@@ -3,7 +3,11 @@ extends Node2D
 var ui_visibility = true
 
 var gameIsPaused = false
+var playerIsDead = false
 
+var oxygen
+var heat
+var condition
 
 
 func _ready():
@@ -12,6 +16,10 @@ func _ready():
 
 func _physics_process(delta):
 	
+	
+	condition = $Player/HurtBox.health
+	heat = $Player/HeatManager.cur_temp
+	oxygen = $Player/Oxygen.oxygen
 	
 	# Manage UI
 	
@@ -46,6 +54,22 @@ func _physics_process(delta):
 	
 	
 	
+	if playerIsDead == true:
+		
+		
+		
+		$WarningScreen/RichTextLabel2.text = "|CRITIC|"
+		
+		
+		
+		
+		
+		get_tree().paused = true
+		$WarningScreen.visible = true
+		$RepairStation/Timer.start()
+		
+	
+	
 	
 	
 	
@@ -65,3 +89,18 @@ func change_anim():
 	$UI/Missile/Missile/AnimationPlayer.play("Idle")
 	$UI/Missile/RichTextLabel.text = "Missile Ready"
 
+
+
+func _on_Player_playerIsDead():
+	
+	playerIsDead = true
+
+
+func _on_Timer_timeout():
+	
+	$RepairStation/Timer.stop()
+	$RepairStation.visible = true
+	
+	
+	
+	
