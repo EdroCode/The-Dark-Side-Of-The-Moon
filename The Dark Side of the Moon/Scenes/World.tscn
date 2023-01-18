@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites.png" type="Texture" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://Scripts/ScoreManager.gd" type="Script" id=10]
 [ext_resource path="res://Assets/missile.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/WaveSpawner.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/MotorRepair.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/PauseMenu.gd" type="Script" id=14]
 
 [sub_resource type="Curve" id=4]
@@ -251,6 +250,36 @@ texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 6 )
 fill_mode = 3
 
+[node name="Oxygen" type="Control" parent="UI"]
+margin_left = 66.0
+margin_top = 4.0
+margin_right = 106.0
+margin_bottom = 44.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Oxygen"]
+margin_left = 372.0
+margin_top = 7.0
+margin_right = 404.0
+margin_bottom = 16.0
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 1 )
+text = "O2"
+scroll_active = false
+
+[node name="TextureProgress" type="TextureProgress" parent="UI/Oxygen"]
+margin_left = 367.0
+margin_top = 17.0
+margin_right = 382.0
+margin_bottom = 49.0
+rect_scale = Vector2( 3.5, 3.5 )
+value = 100.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+fill_mode = 3
+
 [node name="Score" type="Control" parent="UI"]
 margin_left = 256.0
 margin_top = 4.0
@@ -327,6 +356,8 @@ margin_bottom = 472.0
 color = Color( 0, 0, 0, 0.517647 )
 
 [node name="TextureRect" type="TextureRect" parent="WarningScreen"]
+margin_right = 512.0
+margin_bottom = 512.0
 texture = ExtResource( 9 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="WarningScreen"]
@@ -364,9 +395,6 @@ autoplay = "Warning"
 playback_speed = 10.0
 anims/RESET = SubResource( 8 )
 anims/Warning = SubResource( 7 )
-
-[node name="MotorRepair" parent="." instance=ExtResource( 13 )]
-visible = false
 
 [node name="PauseMenu" type="Control" parent="."]
 pause_mode = 2

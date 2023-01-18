@@ -8,6 +8,7 @@ var boosting = false
 
 func _ready():
 	
+	$CoolTimer.start()
 	max_temp = 100
 	cur_temp = 0
 
@@ -29,6 +30,7 @@ func _physics_process(delta):
 	elif Input.is_action_just_released("Boost"):
 		
 		$HeatTimer.stop()
+		
 	
 	if cur_temp <= 50:
 		

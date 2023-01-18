@@ -78,7 +78,7 @@ func _physics_process(delta):
 	if has_shot == false:
 		
 		
-		if Input.is_action_just_pressed("Fire"):
+		if Input.is_action_pressed("Fire"):
 			shoot_bullet()
 			has_shot = true
 			$ShotDelay.start()
@@ -150,3 +150,7 @@ func _on_ShotDelay_timeout():
 func _on_MissileDelay_timeout():
 	
 	has_shot_missile = false
+
+
+func _on_O2Timer_timeout():
+	pass # Replace with function body.

@@ -10,7 +10,7 @@ var explode_scene = preload("res://Scenes/Particles/ExplodeParticles.tscn")
 func _physics_process(delta):
 	
 	
-	print(health)
+	pass
 
 
 

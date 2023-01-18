@@ -19,6 +19,8 @@ func _physics_process(delta):
 	$UI/Heat/TextureProgress.value = $Player.get_node("HeatManager").cur_temp
 	$UI/Condition/TextureProgress.max_value = $Player.get_node("HurtBox").max_health
 	$UI/Condition/TextureProgress.value = $Player.get_node("HurtBox").health
+	$UI/Oxygen/TextureProgress.value = $Player.get_node("Oxygen").oxygen
+	
 	
 	$UI/Score/RichTextLabel2.text = str($ScoreManager.score)
 	
