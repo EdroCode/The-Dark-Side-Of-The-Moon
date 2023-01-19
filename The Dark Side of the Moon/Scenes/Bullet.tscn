@@ -11,6 +11,7 @@ extents = Vector2( 3.00001, 2.99999 )
 
 [node name="Bullet" type="RigidBody2D" groups=["Bullet"]]
 rotation = 6.28319
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Sprites" type="Sprite" parent="."]
@@ -25,6 +26,7 @@ shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( -2.67983e-05, -6 )
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 2.67983e-05, 6 )

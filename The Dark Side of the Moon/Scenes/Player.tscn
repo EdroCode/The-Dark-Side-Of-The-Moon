@@ -20,6 +20,8 @@ extents = Vector2( 7.99994, 10.0001 )
 radius = 231.106
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -90,6 +92,8 @@ script = ExtResource( 3 )
 wait_time = 5.0
 
 [node name="DetectArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]

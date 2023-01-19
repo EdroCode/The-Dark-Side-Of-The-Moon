@@ -245,6 +245,10 @@ scale_amount = 3.0
 scale_amount_curve = SubResource( 4 )
 
 [node name="WaveSpawner" parent="." instance=ExtResource( 12 )]
+position = Vector2( 691, 789 )
+
+[node name="WaveSpawner2" parent="." instance=ExtResource( 12 )]
+position = Vector2( 19, 26 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 253, 413 )
@@ -420,6 +424,7 @@ anims/RESET = SubResource( 10 )
 
 [node name="WarningScreen" type="Control" parent="."]
 pause_mode = 2
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -474,6 +479,7 @@ anims/Warning = SubResource( 7 )
 
 [node name="PauseMenu" type="Control" parent="."]
 pause_mode = 2
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 14 )
@@ -537,6 +543,7 @@ text = "0"
 scroll_active = false
 
 [node name="Walls" type="StaticBody2D" parent="." groups=["Walls"]]
+collision_mask = 2
 physics_material_override = SubResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls" groups=["Walls"]]
