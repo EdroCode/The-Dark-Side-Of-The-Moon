@@ -41,6 +41,10 @@ func _physics_process(delta):
 		
 	
 	
+	if cur_temp >= 100:
+		
+		get_parent().emit_signal("playerIsDead")
+	
 
 
 func increase_temp(value):

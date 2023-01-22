@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/o_n_e_s_i_e_Free_Chiptune_Loop_(getmp3.pro).mp3-5a497a67b959fa2c931c30a88ed61dd3.mp3str"
+
+[deps]
+
+source_file="res://o_n_e_s_i_e_Free_Chiptune_Loop_(getmp3.pro).mp3"
+dest_files=[ "res://.import/o_n_e_s_i_e_Free_Chiptune_Loop_(getmp3.pro).mp3-5a497a67b959fa2c931c30a88ed61dd3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

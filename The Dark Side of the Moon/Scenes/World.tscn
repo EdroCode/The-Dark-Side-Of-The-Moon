@@ -252,24 +252,30 @@ scale_amount_curve = SubResource( 4 )
 [node name="WaveSpawner" parent="." instance=ExtResource( 12 )]
 position = Vector2( 691, 789 )
 
+[node name="WaveSpawner3" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1827, 237 )
+
+[node name="WaveSpawner4" parent="." instance=ExtResource( 12 )]
+position = Vector2( -1123, 326 )
+
+[node name="WaveSpawner5" parent="." instance=ExtResource( 12 )]
+position = Vector2( -1123, 326 )
+
 [node name="WaveSpawner2" parent="." instance=ExtResource( 12 )]
 position = Vector2( 19, 26 )
 
 [node name="UFOSpawner" parent="." instance=ExtResource( 16 )]
 
+[node name="EnemyShip" parent="." instance=ExtResource( 8 )]
+position = Vector2( 89, -70 )
+
+[node name="EnemyShip2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 345, -67 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 253, 413 )
 rotation = -1.57079
 scale = Vector2( 1.2, 1.2 )
-
-[node name="EnemyShip" parent="." instance=ExtResource( 8 )]
-position = Vector2( 68, 48 )
-
-[node name="EnemyShip2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 145, 97 )
-
-[node name="EnemyShip3" parent="." instance=ExtResource( 8 )]
-position = Vector2( 311, 68 )
 
 [node name="UI" type="Control" parent="."]
 margin_right = 40.0

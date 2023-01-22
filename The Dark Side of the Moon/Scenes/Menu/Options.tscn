@@ -61,6 +61,9 @@ custom_icons/grabber = ExtResource( 3 )
 custom_styles/slider = SubResource( 1 )
 custom_styles/grabber_area_highlight = SubResource( 1 )
 custom_styles/grabber_area = SubResource( 1 )
+max_value = 10.0
+value = 3.0
+rounded = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Sliders/MusicSlider"]
 margin_left = 50.0
@@ -72,6 +75,7 @@ text = "MUSIC"
 scroll_active = false
 
 [node name="MusicSlider2" type="Control" parent="Sliders"]
+visible = false
 margin_top = 72.0
 margin_right = 40.0
 margin_bottom = 112.0
@@ -111,4 +115,5 @@ custom_fonts/font = SubResource( 3 )
 text = "BACK"
 flat = true
 
+[connection signal="value_changed" from="Sliders/MusicSlider/HSlider" to="." method="_on_HSlider_value_changed"]
 [connection signal="pressed" from="Buttons/Button" to="." method="_on_Button_pressed"]

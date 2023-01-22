@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Sprites.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Enemys/UFOEnemy.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Enemys/EnemyHealthSystem.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 4 )
@@ -9,7 +10,7 @@ extents = Vector2( 8, 4 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 99.1816
 
-[node name="UFOEnemy" type="KinematicBody2D" groups=["Target"]]
+[node name="UFOEnemy" type="KinematicBody2D" groups=["Enemy", "Target"]]
 scale = Vector2( 2, 2 )
 z_index = 2
 script = ExtResource( 2 )
@@ -36,5 +37,10 @@ position = Vector2( 0, 1 )
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource( 3 )
+health = 200
+max_health = 200
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

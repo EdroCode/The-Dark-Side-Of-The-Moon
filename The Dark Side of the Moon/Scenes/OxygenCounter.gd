@@ -9,6 +9,14 @@ func _ready():
 	pass
 
 
+
+func _physics_process(delta):
+	
+	
+	if oxygen <= 0:
+		
+		get_parent().emit_signal("playerIsDead")
+
 func dicrease_oxygen(value):
 	
 	

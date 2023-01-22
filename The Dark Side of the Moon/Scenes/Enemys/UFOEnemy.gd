@@ -58,7 +58,7 @@ func shoot_bullet():
 
 func _on_Timer_timeout():
 	
-
+	
 	shoot_bullet()
 
 

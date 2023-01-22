@@ -138,7 +138,7 @@ func shoot_bullet():
 	
 	# Play Sound
 	
-	$Sounds/LazerBeam.play()
+	
 	
 	# Instantiate the Bullet
 	

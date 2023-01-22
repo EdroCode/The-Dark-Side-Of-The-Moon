@@ -59,6 +59,7 @@ func _physics_process(delta):
 	if playerIsDead == true:
 		
 		$Player.get_node("BoostParticles").emitting = false
+		$Player.get_node("HeatManager").get_node("HeatTimer").stop()
 		
 		if lifes_left >= 0:
 			

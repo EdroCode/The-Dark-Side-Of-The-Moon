@@ -11,20 +11,28 @@ config_version=4
 [application]
 
 config/name="The Dark Side of the Moon"
-run/main_scene="res://Scenes/Menu/Menu.tscn"
+run/main_scene="res://Scenes/Menu/SplashScreen.tscn"
 config/icon="res://Assets/ico.png"
+
+[audio]
+
+default_bus_layout="res://new_audiobuslayout.tres"
 
 [autoload]
 
 GameManager="*res://Scripts/GameManager.gd"
+AudioController="*res://Sounds/AudioController.tscn"
 
 [display]
 
 window/size/width=512
 window/size/height=512
+window/size/resizable=false
 window/size/test_width=512
 window/size/test_height=512
 mouse_cursor/custom_image="res://Assets/cursor.png"
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [gui]
 

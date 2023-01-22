@@ -1,15 +1,22 @@
 extends Control
 
 
+
+
+
+
+
 func _ready():
 	
 	$RichTextLabel.visible_characters = 0
+	AudioController.play_music()
 
 
 
 func _process(delta):
 	
 	$RichTextLabel.visible_characters += 1
+
 
 
 
