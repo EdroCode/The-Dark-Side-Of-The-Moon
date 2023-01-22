@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Sprites.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player/PlayerManager.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scripts/HurtBox.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Player/DetectArea.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/OxygenCounter.gd" type="Script" id=6]
+[ext_resource path="res://lazerbeam.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.00005, 7.99996 )
@@ -104,6 +105,13 @@ wait_time = 0.3
 
 [node name="MissileDelay" type="Timer" parent="."]
 wait_time = 3.2
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="LazerBeam" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 7 )
+volume_db = 24.0
+bus = "SFX"
 
 [connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_body_entered"]
 [connection signal="body_exited" from="HurtBox" to="HurtBox" method="_on_HurtBox_body_exited"]

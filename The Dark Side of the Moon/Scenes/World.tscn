@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://Scenes/WaveSpawner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/RepairStation.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/PauseMenu.gd" type="Script" id=14]
+[ext_resource path="res://Scenes/DeathScreen.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/Enemys/UFOSpawner.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0.681818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -217,6 +219,9 @@ tracks/4/keys = {
 "values": [ Vector2( 213, 271 ), Vector2( 213, 301 ), Vector2( 213, 271 ) ]
 }
 
+[sub_resource type="DynamicFont" id=12]
+font_data = ExtResource( 4 )
+
 [sub_resource type="PhysicsMaterial" id=3]
 
 [node name="World" type="Node2D"]
@@ -250,6 +255,8 @@ position = Vector2( 691, 789 )
 [node name="WaveSpawner2" parent="." instance=ExtResource( 12 )]
 position = Vector2( 19, 26 )
 
+[node name="UFOSpawner" parent="." instance=ExtResource( 16 )]
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 253, 413 )
 rotation = -1.57079
@@ -267,18 +274,21 @@ position = Vector2( 311, 68 )
 [node name="UI" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 
 [node name="Condition" type="Control" parent="UI"]
 margin_left = 3.0
 margin_top = 4.0
 margin_right = 43.0
 margin_bottom = 44.0
+mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Condition"]
 margin_left = 9.0
 margin_top = 7.0
 margin_right = 87.0
 margin_bottom = 33.0
+mouse_filter = 2
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 1 )
 custom_fonts/italics_font = SubResource( 1 )
@@ -293,6 +303,7 @@ margin_top = 19.0
 margin_right = 25.0
 margin_bottom = 51.0
 rect_scale = Vector2( 3.5, 3.5 )
+mouse_filter = 2
 texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 6 )
 fill_mode = 3
@@ -302,12 +313,14 @@ margin_left = -5.0
 margin_top = 4.0
 margin_right = 35.0
 margin_bottom = 44.0
+mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Heat"]
 margin_left = 474.0
 margin_top = 7.0
 margin_right = 506.0
 margin_bottom = 16.0
+mouse_filter = 2
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 1 )
 custom_fonts/italics_font = SubResource( 1 )
@@ -322,7 +335,7 @@ margin_top = 17.0
 margin_right = 492.0
 margin_bottom = 49.0
 rect_scale = Vector2( 3.5, 3.5 )
-mouse_filter = 0
+mouse_filter = 2
 value = 100.0
 texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 6 )
@@ -333,12 +346,14 @@ margin_left = 66.0
 margin_top = 4.0
 margin_right = 106.0
 margin_bottom = 44.0
+mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Oxygen"]
 margin_left = 372.0
 margin_top = 7.0
 margin_right = 404.0
 margin_bottom = 16.0
+mouse_filter = 2
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 1 )
 custom_fonts/italics_font = SubResource( 1 )
@@ -353,7 +368,7 @@ margin_top = 17.0
 margin_right = 382.0
 margin_bottom = 49.0
 rect_scale = Vector2( 3.5, 3.5 )
-mouse_filter = 0
+mouse_filter = 2
 value = 100.0
 texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 6 )
@@ -364,12 +379,14 @@ margin_left = 256.0
 margin_top = 4.0
 margin_right = 295.0
 margin_bottom = 44.0
+mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Score"]
 margin_left = -38.0
 margin_top = 7.0
 margin_right = 40.0
 margin_bottom = 33.0
+mouse_filter = 2
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 1 )
 custom_fonts/italics_font = SubResource( 1 )
@@ -383,6 +400,7 @@ margin_left = 10.0
 margin_top = 7.0
 margin_right = 88.0
 margin_bottom = 33.0
+mouse_filter = 2
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 1 )
 custom_fonts/italics_font = SubResource( 1 )
@@ -394,12 +412,14 @@ scroll_active = false
 [node name="Missile" type="Control" parent="UI"]
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Missile"]
 margin_left = 385.0
 margin_top = 453.0
 margin_right = 463.0
 margin_bottom = 479.0
+mouse_filter = 2
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 1 )
 custom_fonts/italics_font = SubResource( 1 )
@@ -422,23 +442,24 @@ anims/Idle = SubResource( 11 )
 anims/Load = SubResource( 9 )
 anims/RESET = SubResource( 10 )
 
-[node name="WarningScreen" type="Control" parent="."]
+[node name="WarningScreen" type="CanvasLayer" parent="."]
 pause_mode = 2
+layer = 5
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="WarningScreen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 472.0
 margin_bottom = 472.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 0.517647 )
 
 [node name="TextureRect" type="TextureRect" parent="WarningScreen"]
 margin_right = 512.0
 margin_bottom = 512.0
 rect_scale = Vector2( 1, 0.858 )
+mouse_filter = 2
 texture = ExtResource( 9 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="WarningScreen"]
@@ -448,6 +469,7 @@ margin_top = 206.0
 margin_right = 345.0
 margin_bottom = 266.0
 rect_scale = Vector2( 3, 3 )
+mouse_filter = 2
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 1 )
 custom_fonts/italics_font = SubResource( 1 )
@@ -463,6 +485,7 @@ margin_top = 271.0
 margin_right = 622.0
 margin_bottom = 331.0
 rect_scale = Vector2( 0.8, 0.8 )
+mouse_filter = 2
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 1 )
 custom_fonts/italics_font = SubResource( 1 )
@@ -477,11 +500,10 @@ playback_speed = 10.0
 anims/RESET = SubResource( 8 )
 anims/Warning = SubResource( 7 )
 
-[node name="PauseMenu" type="Control" parent="."]
+[node name="PauseMenu" type="CanvasLayer" parent="."]
 pause_mode = 2
+layer = 37
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
 script = ExtResource( 14 )
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu"]
@@ -542,6 +564,83 @@ custom_fonts/normal_font = SubResource( 6 )
 text = "0"
 scroll_active = false
 
+[node name="DeathScreen" type="CanvasLayer" parent="."]
+pause_mode = 2
+visible = false
+script = ExtResource( 15 )
+
+[node name="ColorRect" type="ColorRect" parent="DeathScreen"]
+pause_mode = 2
+margin_right = 512.0
+margin_bottom = 512.0
+color = Color( 0.0823529, 0.0823529, 0.0823529, 0.705882 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DeathScreen/ColorRect"]
+pause_mode = 2
+modulate = Color( 1, 0.270588, 0.27451, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = -100.0
+margin_right = 42.0
+margin_bottom = -74.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( -0.222229, 0.666672 )
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 6 )
+text = "YOU LOST"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="DeathScreen/ColorRect"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -73.0
+margin_top = -66.0
+margin_right = 222.0
+margin_bottom = -6.0
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 6 )
+text = "SCORE:"
+scroll_active = false
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="DeathScreen/ColorRect"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 31.0
+margin_top = -65.0
+margin_right = 326.0
+margin_bottom = -5.0
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 6 )
+text = "0"
+scroll_active = false
+
+[node name="Button" type="Button" parent="DeathScreen"]
+margin_left = 210.0
+margin_top = 228.0
+margin_right = 286.0
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 12 )
+text = "MENU"
+flat = true
+
 [node name="Walls" type="StaticBody2D" parent="." groups=["Walls"]]
 collision_mask = 2
 physics_material_override = SubResource( 3 )
@@ -567,4 +666,6 @@ wait_time = 5.0
 
 [connection signal="missel_launched" from="Player" to="." method="_on_Player_missel_launched"]
 [connection signal="playerIsDead" from="Player" to="." method="_on_Player_playerIsDead"]
+[connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_Button_pressed"]
+[connection signal="playerIsAlive" from="RepairStation" to="." method="_on_RepairStation_playerIsAlive"]
 [connection signal="timeout" from="RepairStation/Timer" to="." method="_on_Timer_timeout"]

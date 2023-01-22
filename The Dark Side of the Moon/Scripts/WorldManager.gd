@@ -9,6 +9,7 @@ var oxygen
 var heat
 var condition
 
+var lifes_left := 3
 
 func _ready():
 	$UI/Missile/RichTextLabel.text = "Missile Ready"
@@ -54,23 +55,39 @@ func _physics_process(delta):
 	
 	
 	
+	
 	if playerIsDead == true:
 		
+		$Player.get_node("BoostParticles").emitting = false
 		
-		
-		$WarningScreen/RichTextLabel2.text = "|CRITIC|"
-		
-		
-		
-		
+		if lifes_left >= 0:
+			
+			$WarningScreen/RichTextLabel2.text = "|CRITIC|"
+			
+			
+			
+			
+			var particles = get_tree().get_nodes_in_group("Particle")
+			for particle in particles:
+			  particle.queue_free()
+			
+			var enemys = get_tree().get_nodes_in_group("Enemy")
+			for enemy in enemys:
+			  enemy.queue_free()
+			
+			get_tree().paused = true
+			$WarningScreen.visible = true
+			$RepairStation/Timer.start()
+			
+			
+			
+	
+	
+	if lifes_left <= -1:
 		
 		get_tree().paused = true
-		$WarningScreen.visible = true
-		$RepairStation/Timer.start()
+		$DeathScreen.visible = true
 		
-	
-	
-	
 	
 	
 
@@ -104,3 +121,9 @@ func _on_Timer_timeout():
 	
 	
 	
+
+
+func _on_RepairStation_playerIsAlive():
+	
+	playerIsDead = false
+	lifes_left -= 1

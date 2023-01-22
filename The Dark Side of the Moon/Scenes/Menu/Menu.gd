@@ -2,14 +2,14 @@ extends Control
 
 
 func _ready():
-	pass
+	
+	$RichTextLabel.visible_characters = 0
 
 
 
 func _process(delta):
 	
-	
-	pass
+	$RichTextLabel.visible_characters += 1
 
 
 
@@ -22,11 +22,13 @@ func _on_StartButton_pressed():
 
 
 func _on_OptionsButton_pressed():
-	pass # Replace with function body.
+	
+	get_tree().change_scene("res://Scenes/Menu/Options.tscn")
 
 
 func _on_CreditsButton_pressed():
-	pass # Replace with function body.
+	
+	get_tree().change_scene("res://Scenes/Menu/Credits.tscn")
 
 
 func _on_QuitButton_pressed():

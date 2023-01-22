@@ -7,6 +7,7 @@ var ufo = preload("res://Scenes/Enemys/UFOEnemy.tscn")
 
 
 
+
 var max_enemys : int = 1
 var i : int
 

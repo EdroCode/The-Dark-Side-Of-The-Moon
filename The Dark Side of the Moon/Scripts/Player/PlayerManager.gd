@@ -6,7 +6,7 @@ extends KinematicBody2D
 #Variables
 
 var velocity = Vector2()
-var acceleration = 100
+var acceleration = 130
 var rotation_speed = 5
 var deceleration = 2
 var test = Vector2.ZERO
@@ -28,7 +28,7 @@ var missile_trail = preload("res://Scenes/Particles/MissileTrailRED.tscn")
 var oxygen
 var heat
 var condition
-
+var player_dead = false
 
 # Signals
 
@@ -62,17 +62,23 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("Up"):
 		velocity += Vector2(acceleration, 0).rotated(rotation) * delta
-	
+	if Input.is_action_pressed("Right"):
+		velocity += Vector2(acceleration, 0).rotated(rotation + (PI/2)) * delta
+	if Input.is_action_pressed("Left"):
+		velocity += Vector2(acceleration, 0).rotated(rotation - (PI/2)) * delta
+		
 	if Input.is_action_pressed("Boost"):
 		
 		
 		$BoostParticles.emitting = true
 		
+		velocity += Vector2(acceleration, 0).rotated(rotation) * delta
 		acceleration +=5
 		if acceleration >= 300:
 			acceleration = 300
 		
 	elif Input.is_action_just_released("Boost"):
+		
 		
 		$BoostParticles.emitting = false
 		acceleration -= 30
@@ -105,6 +111,7 @@ func _physics_process(delta):
 		
 		
 		if Input.is_action_pressed("Fire"):
+			
 			shoot_bullet()
 			has_shot = true
 			$ShotDelay.start()
@@ -116,7 +123,7 @@ func _physics_process(delta):
 			
 			if Input.is_action_just_pressed("Missile"):
 				
-				
+				player_dead = true
 				emit_signal("missel_launched")
 				
 				has_shot_missile = true
@@ -128,6 +135,10 @@ func _physics_process(delta):
 
 
 func shoot_bullet():
+	
+	# Play Sound
+	
+	$Sounds/LazerBeam.play()
 	
 	# Instantiate the Bullet
 	

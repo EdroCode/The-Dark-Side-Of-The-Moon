@@ -10,7 +10,7 @@
 font_data = ExtResource( 4 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30.5, 34 )
+extents = Vector2( 37.75, 50 )
 
 [node name="RepairStation" type="Node2D"]
 pause_mode = 2
@@ -109,29 +109,97 @@ text = "Condition"
 scroll_active = false
 
 [node name="Object" parent="." instance=ExtResource( 1 )]
-pause_mode = 2
 position = Vector2( 460, 316 )
 scale = Vector2( 4, 4 )
 
 [node name="Object2" parent="." instance=ExtResource( 1 )]
-pause_mode = 2
 position = Vector2( 461, 394 )
 scale = Vector2( 4, 4 )
 sprite = 1
 
 [node name="Object3" parent="." instance=ExtResource( 1 )]
-pause_mode = 2
 position = Vector2( 461, 458 )
 scale = Vector2( 4, 4 )
 sprite = 2
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HeatArea" type="Area2D" parent="."]
 pause_mode = 2
-position = Vector2( 260, 205 )
+position = Vector2( 415, 112 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeatArea"]
 pause_mode = 2
+position = Vector2( 7.25, 16 )
+scale = Vector2( 0.8, 0.8 )
 shape = SubResource( 1 )
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
+[node name="ColorRect2" type="ColorRect" parent="HeatArea"]
+pause_mode = 2
+visible = false
+margin_left = -30.0
+margin_top = -33.0
+margin_right = 45.0
+margin_bottom = 65.0
+mouse_filter = 2
+color = Color( 1, 0.270588, 0.27451, 1 )
+
+[node name="OxygenArea" type="Area2D" parent="."]
+pause_mode = 2
+position = Vector2( 83, 191 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OxygenArea"]
+pause_mode = 2
+position = Vector2( 7.25, 16 )
+scale = Vector2( 0.8, 0.8 )
+shape = SubResource( 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="OxygenArea"]
+pause_mode = 2
+visible = false
+margin_left = -30.0
+margin_top = -32.0
+margin_right = 45.0
+margin_bottom = 66.0
+mouse_filter = 2
+color = Color( 1, 0.270588, 0.27451, 1 )
+
+[node name="ConditionArea" type="Area2D" parent="."]
+pause_mode = 2
+position = Vector2( 304, 405 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConditionArea"]
+pause_mode = 2
+position = Vector2( 7.25, 16 )
+scale = Vector2( 0.8, 0.8 )
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="ConditionArea"]
+pause_mode = 2
+visible = false
+margin_left = -30.0
+margin_top = -33.0
+margin_right = 45.0
+margin_bottom = 65.0
+mouse_filter = 2
+color = Color( 1, 0.270588, 0.27451, 1 )
+
+[node name="Timer2" type="Timer" parent="."]
+pause_mode = 2
+wait_time = 5.0
+autostart = true
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 460, 316 )
+
+[node name="Position2D2" type="Position2D" parent="."]
+position = Vector2( 461, 394 )
+
+[node name="Position2D3" type="Position2D" parent="."]
+position = Vector2( 461, 458 )
+
+[connection signal="area_entered" from="HeatArea" to="." method="_on_HeatArea_area_entered"]
+[connection signal="area_exited" from="HeatArea" to="." method="_on_HeatArea_area_exited"]
+[connection signal="area_entered" from="OxygenArea" to="." method="_on_OxygenArea_area_entered"]
+[connection signal="area_exited" from="OxygenArea" to="." method="_on_OxygenArea_area_exited"]
+[connection signal="area_entered" from="ConditionArea" to="." method="_on_ConditionArea_area_entered"]
+[connection signal="area_exited" from="ConditionArea" to="." method="_on_ConditionArea_area_exited"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
